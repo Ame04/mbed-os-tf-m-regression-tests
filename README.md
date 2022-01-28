@@ -68,6 +68,15 @@ To display help on supported options and targets:
 
 ```
 python3 build_tfm.py -h
+``
+
+## NUCLEO-L552ZE
+
+A postbuild script is needed to update and copy script files.
+
+```
+python build_tfm.py -m NUCLEO_L552ZE_Q_S
+./STM32_TFM_postbuild.sh
 ```
 
 ## Building the TF-M Regression Test suite
@@ -103,6 +112,7 @@ to build an application that runs the test suite.
 * Make sure the TF-M Regression Test suite has **PASSED** on the board before
 running any PSA Compliance Test suite to avoid unpredictable behavior.
 * M2354 hasn't supported PSA compliance test yet.
+* NUCLEO_L552ZE_Q_S hasn't supported PSA compliance test yet.
 
 ## Building the Mbed OS application
 
@@ -140,6 +150,25 @@ The binary is located at:
 1. Press the reset button on the Mbed device to run the program.
 
 **Note:** The default serial port baud rate is 115200 baud.
+
+### NUCLEO_L552ZE_Q_S flashing
+
+For NUCLEO_L552ZE_Q_S, drag and drop feature to copy secured binary files is not supported.
+
+You need to install [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html) application
+
+and add it in your environment path:
+```
+PATH="/C/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/":$PATH
+or
+PATH="~/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/":$PATH
+```
+
+Then execute 2 scripts in this order:
+```
+./regression.sh
+./TFM_UPDATE.sh
+```
 
 ## Automating all test suites
 
